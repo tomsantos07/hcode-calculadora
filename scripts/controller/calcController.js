@@ -1,6 +1,8 @@
 class CalcController {
 
   constructor() {
+
+    this._operation = [];
     this._locale = 'pt-BR';
     this._displayCalc = document.querySelector('#display')
     this._dateEl = document.querySelector('#data');
@@ -8,6 +10,7 @@ class CalcController {
     this._currentDate;
     this.initialize();
     this.initButtonEvents();
+
   }
 
   initialize() {
@@ -19,6 +22,7 @@ class CalcController {
       this.setDisplayDateTime();
       
     }, 1000)
+
   }
 
   addEventListenerAll(element, events, fn) {
@@ -31,15 +35,71 @@ class CalcController {
     
   }
 
+  clearAll() {
+
+  }
+
+  clearEntry() {
+
+  }
+
+  setError() {
+
+    this.displayCalc = "Error";
+
+  }
+
+  execBtn(value) {
+
+    switch (value) {
+
+      case 'ac':
+        this.clearAll();
+        break;
+
+      case 'ce':
+        this.clearEntry();
+        break;
+
+      case 'soma':
+        break;
+
+      case 'subtracao':
+        break;
+
+      case 'divisao':
+        break;
+
+      case 'multiplicacao':
+        break;
+
+      case 'porcento':
+        break;
+
+      case 'igual':
+        break;
+
+      default:
+        this.setError();
+        break;
+        
+    }
+  }
+
   initButtonEvents() {
 
     let buttons = document.querySelectorAll("#buttons > g, #parts > g")
 
     buttons.forEach((btn, index) => {
 
-      this.addEventListenerAll(btn, "click drag mouseover", e => {
+      this.addEventListenerAll(btn, "click drag", e => {
 
-        console.log(btn.className.baseVal.replace("btn-", ""));      
+        let textBtn = btn.className.baseVal.replace("btn-", ""); 
+
+        console.log(textBtn);
+        
+        
+        this.execBtn();
 
       });
 
@@ -78,11 +138,11 @@ class CalcController {
   }
 
   get displayCalc() {    
-    return this._displayCalc;
+    return this._displayCalc.innerHTML;
   }
 
   set displayCalc(value) {   
-    this._displayCalc = value;
+    this._displayCalc.innerHTML = value;
   }
 
   get currentDate() {
