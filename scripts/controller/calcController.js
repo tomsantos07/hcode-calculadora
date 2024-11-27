@@ -4,7 +4,7 @@ class CalcController {
 
     this._operation = [];
     this._locale = 'pt-BR';
-    this._displayCalc = document.querySelector('#display')
+    this._displayCalcEl = document.querySelector('#display')
     this._dateEl = document.querySelector('#data');
     this._timeEl = document.querySelector('#hora');
     this._currentDate;
@@ -48,12 +48,14 @@ class CalcController {
   }
 
   getLastOperation() {
+
     return this._operation[this._operation.length-1];
+
   }
 
   setLastOperation(value) {
 
-    this._operation[this._operation.length-1] = value
+    return this._operation[this._operation.length-1] = value
 
   }
 
@@ -66,17 +68,18 @@ class CalcController {
   addOperation(value) {
 
     console.log('A', isNaN(this.getLastOperation()));
+    
 
     if (isNaN(this.getLastOperation())) {
 
       if (this.isOperator(value)) {
-
-        this._setLastOperation(value)
         
+        this.setLastOperation(value);
+
       } else if(isNaN(value)) {
 
-        // Outra coisa
-        console.log(value); 
+        //Outra coisa
+        console.log(value);
 
       } else {
 
@@ -85,13 +88,15 @@ class CalcController {
       }
 
     } else {
+
       let newValue = this.getLastOperation().toString() + value.toString();
+
       this.setLastOperation(parseInt(newValue));
+
     }
 
     console.log(this._operation);
-    
-    
+       
   }
 
   setError() {
@@ -154,7 +159,7 @@ class CalcController {
 
       default:
         this.setError();
-        
+        break;
         
     }
   }
@@ -208,11 +213,11 @@ class CalcController {
   }
 
   get displayCalc() {    
-    return this._displayCalc.innerHTML;
+    return this._displayCalcEl.innerHTML;
   }
 
   set displayCalc(value) {   
-    this._displayCalc.innerHTML = value;
+    this._displayCalcEl.innerHTML = value;
   }
 
   get currentDate() {
