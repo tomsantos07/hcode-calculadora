@@ -89,7 +89,7 @@ class CalcController {
 
     let last = '';
 
-    if (this._operation.length >3) {
+    if (this._operation.length > 3) {
       last = this._operation.pop();
     }
 
@@ -303,3 +303,4 @@ class CalcController {
     this._currentDate = valor;
   }
 }
+
